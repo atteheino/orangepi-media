@@ -104,5 +104,11 @@ Create file for files and set permissions:
 
 # get s3 upload software from GIT
 
+Create user for the software:
 
+`# sudo adduser s3upload`
+
+Add user to group videoftp group so that the user has access to uploaded videos:
+
+`# sudo adduser s3upload videoftp`
 
