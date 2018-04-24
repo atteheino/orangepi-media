@@ -187,9 +187,8 @@ Set path to include awscli:
 
 Add this to .profile of s3upload user
 
-`For AWS CLI:
-
-PATH=~/.local/bin:$PATH`
+```For AWS CLI:
+PATH=~/.local/bin:$PATH```
 
 Finally: 
 
