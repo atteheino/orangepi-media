@@ -184,8 +184,11 @@ Installing the
 `# pip3 install awscli --upgrade --user`
 
 Set path to include awscli:
+
 Add this to .profile of s3upload user
+
 `For AWS CLI:
+
 PATH=~/.local/bin:$PATH`
 
 Finally: 
