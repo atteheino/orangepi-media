@@ -89,6 +89,8 @@ Configure server:
  * write_enable=YES
 * To restrict user to their home dir:
  * chroot_local_user=YES
+* To create files with correct permissions:
+ * local_umask=022
  
 Restart to make config changes apply:
 
@@ -121,6 +123,32 @@ Create file for files and set permissions:
 `# sudo chown videoftp:videoftp files`
 
 
+# Create S3 Bucket & IAM Policy, Group & User
+
+Login to AWS Management console.
+In S3 module, create new S3 bucket with no public access.
+
+In IAM module, create IAM Policy for writing to the new S3 bucket.
+
+* Select S3 as service
+* Grant List & Write
+	* Set Resource, Bucket to filter by the new S3 bucket name.
+* Name: valvontavideot-s3-upload-policy
+
+In IAM Module, create new IAM Group:
+
+* Name: valvontavideot-s3upload-group
+* Select the valvontavideot-s3-upload-policy for the Group policy
+
+
+In IAM Module, create new IAM User:
+
+* Name: valvontavideot-s3upload-user
+* Access type: Programmatic access
+* Group: valvontavideot-s3upload-group
+
+Store AccessKey & Secret to some secure place. You'll need it later.
+
 
 
 # get s3 upload software from GIT
@@ -133,5 +161,48 @@ Add user to group videoftp group so that the user has access to uploaded videos:
 
 `# sudo adduser s3upload videoftp`
 
+Clone S3 uploader software from GitHub:
 
+`# sudo git clone https://github.com/atteheino/s3uploader.git`
+
+Make s3upload the owner of the directory:
+
+`# sudo chown -R s3upload:s3upload s3uploader`
+
+Build the software:
+
+`# make server_linux`
+
+
+# Setup AWS CLI
+
+Let's setup AWS CLI to use Boto Profiles for the upload software to use.
+Installing the 
+
+`# sudo su - s3upload`
+
+`# pip3 install awscli --upgrade --user`
+
+Set path to include awscli:
+Add this to .profile of s3upload user
+`For AWS CLI:
+PATH=~/.local/bin:$PATH`
+
+Finally: 
+
+`# source .profile`
+
+
+Try if awscli works:
+
+`# aws --version`
+
+# Configure AWS CLI credentials
+
+as s3upload user:
+
+`# aws configure`
+
+region = eu-west-1
+output = json
 
