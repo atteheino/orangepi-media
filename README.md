@@ -163,7 +163,10 @@ Add user to group videoftp group so that the user has access to uploaded videos:
 
 Clone S3 uploader software from GitHub:
 
-`# sudo git clone https://github.com/atteheino/s3uploader.git`
+```
+# cd /opt
+# sudo git clone https://github.com/atteheino/s3uploader.git
+```
 
 Make s3upload the owner of the directory:
 
@@ -208,5 +211,6 @@ as s3upload user:
 `# aws configure`
 
 region = eu-west-1
+
 output = json
 
