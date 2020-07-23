@@ -214,3 +214,16 @@ region = eu-west-1
 
 output = json
 
+# Running the software
+Todo
+
+## Install as service
+
+## Making the software run failsafe
+Restart the server daily to make sure no files are left lingering and filling up the disk.
+
+'# sudo crontab -e
+
+Add the following: 
+
+0 12 * * * /sbin/shutdown -r now
